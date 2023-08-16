@@ -3,6 +3,7 @@ import Header from "./components/header";
 import Home from "./components/home";
 import ContactEmails from "./pages/contact_emails";
 import Email from './pages/email';
+import Form from './pages/form';
 
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
       <Routes>
         <Route path='/' element={<ContactEmails />}/>
         <Route path='contact-emails' element={<ContactEmails />} />
-        <Route path='contact-emails/:emailId' element={<Email/>} />
+        <Route path='contact-emails/:emailId' element={<Email />} />
+        <Route path='form' element={<Form/>} />
       </Routes>
     </main>
 

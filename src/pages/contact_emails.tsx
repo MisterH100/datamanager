@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 
+
+
 interface IEmails{
     _id?: number,
     name: string,
@@ -11,7 +13,6 @@ interface IEmails{
 }
 
 const ContactEmails = () => {
-
     const [emails, setEmails] = useState<IEmails[]>([{
         _id: 1,
         name: "",
@@ -33,7 +34,7 @@ const ContactEmails = () => {
     }, []);
 
     return (
-        <section>
+        <section className="relative">
             <div className="overflow-x-scroll">
                 <table className="table">
                     <thead>
@@ -81,14 +82,6 @@ const ContactEmails = () => {
                             )
                         })}
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Message</th>
-                        </tr>
-                    </tfoot>
         
                 </table>
             </div>

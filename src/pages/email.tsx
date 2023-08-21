@@ -11,6 +11,8 @@ interface IEmail{
 }
 
 const Email = () => {
+    const [loading, setLoading] = useState<boolean>();
+    const [feedback, setFeedback] = useState<boolean>()
     const [email, setEmail] = useState<IEmail>({
         name: "",
         lastName: "",
@@ -25,16 +27,27 @@ const Email = () => {
             const response = await axios.get(`http://localhost:8000/api/getEmails/${emailId}`);
             setEmail(response.data)
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-    } 
+    }
+    const deleteData = () => {
+        setLoading(true);
+        try {
+            axios.delete(`http://localhost:8000/api/getEmails/${emailId}`);
+            setTimeout(() => {
+                setLoading(false)
+                setFeedback(true);
+            }, 2000)
+        } catch (error) {
+            console.log(error);
+        }
+    }
     useEffect(() => {
         fetchData();
     }, []);
 
     return (
         <section className="w-full px-[20px] min-w-[300px]">
-
             <div>
                 <div className="flex border-b gap-[10px]">
                     <h1 className="text-5xl font-bold">{email.name}</h1>
@@ -42,11 +55,23 @@ const Email = () => {
                 </div>
                 <p className="py-6">{email.message}</p>
 
-                <Link to={'/contact-emails'}>
-                    <button className="btn btn-ghost btn-xs">back</button>
-                </Link>
             </div>
+            <div className="flex flex-col justify-center items-center gap-[10px]">
+                <Link to={'/contact-emails'}>
+                    <button className="btn  btn-md">back</button>
+                </Link>
+                <button onClick={deleteData} className="btn-error btn btn-md w-[100px]">
+                    {loading? "deleting...": "delete"}
+                </button>
+                {feedback ? 
+                        <div className="alert alert-success">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <span>Email deleted!</span>
+                        </div>
+                : ""}
 
+            </div>
+           
         </section>
     )
 }

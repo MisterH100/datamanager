@@ -9,7 +9,7 @@ import Form from './pages/form';
 function App() {
 
   return (
-    <main className="bg-[#3F3E42] h-screen relative">
+    <main className="bg-[#3F3E42] relative">
       <Header />
       <Home />
       <Routes>

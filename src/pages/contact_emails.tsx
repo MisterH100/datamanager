@@ -81,8 +81,14 @@ const ContactEmails = () => {
                                 </tr>    
                             )
                         })}
+                        <tr>
+                            <th></th>
+                            <td>
+                                {emails.length == 0? "No emails": ''}
+                            </td>
+                            <th></th>
+                        </tr>
                     </tbody>
-        
                 </table>
             </div>
         </section>

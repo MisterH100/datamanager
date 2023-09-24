@@ -11,13 +11,13 @@ const Home = () => {
                 </NavLink>
 
                 <NavLink
-                    to="/blog"
+                    to="/publish"
                     className={({ isActive }) => (isActive ? 'tab-active tab tab-bordered ' : 'tab tab-bordered ')}
-                >   Blog
+                >   Publish
                 </NavLink>
 
                 <NavLink
-                    to="/blog"
+                    to="/publish"
                     className={({ isActive }) => (isActive ? 'tab-active tab tab-bordered ' : 'tab tab-bordered ')}
                 >   Form
                 </NavLink>

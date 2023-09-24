@@ -5,10 +5,12 @@ const Blog = () => {
     const [blogData, setBlogData] = useState({
         name: "Handsome Nyathi",
         title: "",
+        description: "",
         blog: ""
     })
     const [isName, setisName] = useState(true)
     const [isTitle, setisTitle] = useState(true)
+    const [isDesc, setisDesc] = useState(true)
     const [isShort, setisShort] = useState(true)
     const [loading, setLoading] = useState(false)
     const [published, setPublished] = useState(false)
@@ -20,6 +22,7 @@ const Blog = () => {
         })
         blogData.name.length > 1 ?setisName(true): null;
         blogData.title.length > 1 ?setisTitle(true): null;
+        blogData.description.length > 1 ?setisDesc(true): null;
         blogData.blog.length > 500 ?setisShort(true): null;
 
     }
@@ -30,6 +33,9 @@ const Blog = () => {
         }
         if(!blogData.title){
             setisTitle(false)
+        }
+        if(!blogData.description){
+            setisDesc(false)
         }
         if(blogData.blog.length < 500){
             setisShort(false)
@@ -45,6 +51,7 @@ const Blog = () => {
         axios.post("https://misterh-api-server.onrender.com/api/blogs/new", {
             name: blogData.name,
             title: blogData.title,
+            description: blogData.description,
             blog: blogData.blog
         },
         {headers: {
@@ -52,19 +59,15 @@ const Blog = () => {
         }})
         .then((response) =>{
             console.log("Blog published: ",response.status);
-            setTimeout(()=>{
-                setLoading(false);
-                setPublished(true)
-            },3000);
+            setLoading(false);
+            setPublished(true)
             setTimeout(()=>{
                 window.location.reload()
-            },5000)
+            },3000)
         })
         .catch((error) =>{
             console.log(error);
-            setTimeout(()=>{
-                setLoading(false);
-            },3000);
+            setLoading(false);
         });
         
 
@@ -112,14 +115,28 @@ const Blog = () => {
                             id="title"
                             name="title" 
                             type="text"
-                            required 
+                            required
+                            maxLength={200} 
                             placeholder="Blog Title" 
                             className="input input-bordered w-full max-w-xs mt-4 mb-10"
                             onChange={HandleChange}
                         />
                     </label>
+                    <label htmlFor="description" className="flex flex-col">
+                    {isDesc ?<span className="label-text">Blog description</span>:<span className="label-text text-red-600">can not publish without Description!!</span> }
+                        <input
+                            id="description"
+                            name="description" 
+                            type="text"
+                            required
+                            maxLength={300}
+                            placeholder="Blog Description" 
+                            className="input input-bordered w-full min-w-xs mt-4 mb-10"
+                            onChange={HandleChange}
+                        />
+                    </label>
                     <label htmlFor="blog">
-                        {!isShort ?<span className="label-text text-red-600 mt-20">can not publish without or less than 500 words of blog content!!</span>:null }
+                        {!isShort ?<span className="label-text text-red-600 mt-20">can not publish without or less than 500 words of Blog Content!!</span>:null }
                         <textarea
                             id="blog"
                             name="blog"

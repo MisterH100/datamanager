@@ -15,7 +15,7 @@ function App() {
         <Route path='/' element={<ContactEmails />}/>
         <Route path='emails' element={<ContactEmails />} />
         <Route path='emails/:emailId' element={<Email />} />
-        <Route path='blog' element={<Blog/>} />
+        <Route path='publish' element={<Blog/>} />
       </Routes>
     </main>
 

@@ -17,7 +17,7 @@ const Home = () => {
                 </NavLink>
 
                 <NavLink
-                    to="/emails"
+                    to="/blog"
                     className={({ isActive }) => (isActive ? 'tab-active tab tab-bordered ' : 'tab tab-bordered ')}
                 >   Form
                 </NavLink>

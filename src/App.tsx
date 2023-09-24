@@ -8,7 +8,7 @@ import Blog from './pages/blog';
 function App() {
 
   return (
-    <main className="bg-[#3F3E42] relative">
+    <main className="bg-base-100 min-h-screen relative">
       <Header />
       <Home />
       <Routes>

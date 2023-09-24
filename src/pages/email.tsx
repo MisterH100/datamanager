@@ -62,9 +62,9 @@ const Email = () => {
     }, [email]);
 
     return (
-        <section className="w-full px-60 min-w-[300px]">
+        <section className="w-full px-10 md:px-60 min-w-[300px]">
             <div>
-                <div className="flex border-b gap-[10px]">
+                <div className="flex flex-col md:flex-row border-b gap-[10px]">
                     <h1 className="text-5xl font-bold">{email.name}</h1>
                     <p className="py-6">{email.email}</p>
                 </div>
@@ -72,7 +72,7 @@ const Email = () => {
 
             </div>
             <div className="w-full flex items-center justify-between gap-[10px]">
-                <Link to={'/contact-emails'}>
+                <Link to={'/'}>
                     <button className="btn btn-md w-28">back</button>
                 </Link>
                 <button onClick={deleteData} className="btn-error btn btn-md">

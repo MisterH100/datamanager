@@ -5,7 +5,6 @@ import axios from 'axios';
 
 interface IEmail{
     name: string,
-    lastName: string,
     email: string,
     message: string
 }
@@ -20,7 +19,6 @@ const Email = () => {
     })
     const [email, setEmail] = useState<IEmail>({
         name: "",
-        lastName: "",
         email: "",
         message: ""
     });
@@ -29,7 +27,7 @@ const Email = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/api/getEmails/${emailId}`);
+            const response = await axios.get(`https://misterh-api-server.onrender.com/api/emails/email/${emailId}`);
             setEmail(response.data)
         } catch (error) {
             console.log(error);
@@ -38,7 +36,7 @@ const Email = () => {
     const deleteData = () => {
         setLoading(true);
         try {
-            axios.delete(`http://localhost:8000/api/getEmails/${emailId}`);
+            axios.delete(`https://misterh-api-server.onrender.com/api/emails/email/${emailId}`);
             setTimeout(() => {
                 setLoading(false)
                 setFeedback(true);
@@ -64,7 +62,7 @@ const Email = () => {
     }, [email]);
 
     return (
-        <section className="w-full px-[20px] min-w-[300px]">
+        <section className="w-full px-60 min-w-[300px]">
             <div>
                 <div className="flex border-b gap-[10px]">
                     <h1 className="text-5xl font-bold">{email.name}</h1>
@@ -73,11 +71,11 @@ const Email = () => {
                 <p className="py-6">{email.message}</p>
 
             </div>
-            <div className="flex flex-col justify-center items-center gap-[10px]">
+            <div className="w-full flex items-center justify-between gap-[10px]">
                 <Link to={'/contact-emails'}>
-                    <button className="btn  btn-md">back</button>
+                    <button className="btn btn-md w-28">back</button>
                 </Link>
-                <button onClick={deleteData} className="btn-error btn btn-md w-[100px]">
+                <button onClick={deleteData} className="btn-error btn btn-md">
                     {loading? "deleting...": "delete"}
                 </button>
                 {feedback ? 

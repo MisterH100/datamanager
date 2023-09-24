@@ -7,15 +7,20 @@ const Home = () => {
                 <NavLink
                     to="/"
                     className={({ isActive }) => (isActive ? 'tab-active tab tab-bordered ' : 'tab tab-bordered ')}
-                >Emails</NavLink>
+                >   Emails
+                </NavLink>
+
                 <NavLink
-                    to="/form"
+                    to="/blog"
                     className={({ isActive }) => (isActive ? 'tab-active tab tab-bordered ' : 'tab tab-bordered ')}
-                >Form</NavLink>
+                >   Blog
+                </NavLink>
+
                 <NavLink
-                    to="/data"
+                    to="/emails"
                     className={({ isActive }) => (isActive ? 'tab-active tab tab-bordered ' : 'tab tab-bordered ')}
-                >Form</NavLink>
+                >   Form
+                </NavLink>
             </div>
         </section>
     )

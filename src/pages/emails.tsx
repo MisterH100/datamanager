@@ -3,11 +3,9 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 
 
-
 interface IEmails{
     _id?: number,
     name: string,
-    lastName: string,
     email: string,
     message: string
 }
@@ -16,14 +14,13 @@ const ContactEmails = () => {
     const [emails, setEmails] = useState<IEmails[]>([{
         _id: 1,
         name: "",
-        lastName: "",
         email: "",
         message: ""
     }])
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/api/getEmails');
+            const response = await axios.get('https://misterh-api-server.onrender.com/api/emails');
             setEmails(response.data)
         } catch (error) {
             console.log(error)
@@ -58,7 +55,7 @@ const ContactEmails = () => {
                                     <td>
                                         <div className="flex items-center space-x-3">                                   
                                             <div>
-                                                <div className="font-bold">{email.name} { email.lastName}</div>
+                                                <div className="font-bold">{email.name}</div>
                                                 <div className="text-sm opacity-50">{ email.email}</div>
                                             </div>                           
                                         </div>

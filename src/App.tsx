@@ -1,10 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
 import Header from "./components/header";
 import Home from "./components/home";
-import ContactEmails from "./pages/contact_emails";
+import ContactEmails from "./pages/emails";
 import Email from './pages/email';
-import Form from './pages/form';
-
+import Blog from './pages/blog';
 
 function App() {
 
@@ -14,9 +13,9 @@ function App() {
       <Home />
       <Routes>
         <Route path='/' element={<ContactEmails />}/>
-        <Route path='contact-emails' element={<ContactEmails />} />
-        <Route path='contact-emails/:emailId' element={<Email />} />
-        <Route path='form' element={<Form/>} />
+        <Route path='emails' element={<ContactEmails />} />
+        <Route path='emails/:emailId' element={<Email />} />
+        <Route path='blog' element={<Blog/>} />
       </Routes>
     </main>
 

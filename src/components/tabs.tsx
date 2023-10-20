@@ -1,15 +1,18 @@
 import { NavLink } from "react-router-dom"
+import { useGlobalContext } from "../utils/globalContext";
 
-const Home = () => {
+const Tabs = () => {
+    const {user} = useGlobalContext();
     return (
-        <section className="hero h-[100px] min-w-[300px] ">
+        <section className="sticky top-20 z-10 hero h-[100px] min-w-[300px] bg-base-100">
             <div className="tabs">
-                <NavLink
-                    to="/"
-                    className={({ isActive }) => (isActive ? 'tab-active tab tab-bordered ' : 'tab tab-bordered ')}
-                >   Emails
-                </NavLink>
-
+                {user.admin == true?
+                    <NavLink
+                        to="/emails"
+                        className={({ isActive }) => (isActive ? 'tab-active tab tab-bordered ' : 'tab tab-bordered ')}
+                    >   Emails
+                    </NavLink>: null
+                }
                 <NavLink
                     to="/publish"
                     className={({ isActive }) => (isActive ? 'tab-active tab tab-bordered ' : 'tab tab-bordered ')}
@@ -26,4 +29,4 @@ const Home = () => {
     )
 }
 
-export default Home;
+export default Tabs;

@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { ILogin, IUser, useGlobalContext } from "../utils/globalContext";
+import {useGlobalContext } from "../utils/globalContext";
 import { useRef } from "react";
 
 
 const Header = () => {
-    const {setLogin,localUser,setLocalUser} = useGlobalContext();
+    const {localUser,logOut} = useGlobalContext();
     const modalRef = useRef<HTMLDialogElement>(null);
     const showModal =()=>{
         modalRef.current?.showModal();
@@ -32,13 +32,7 @@ const Header = () => {
                         </li>
                         <li>
                             <button
-                                onClick={()=>
-                                    {
-                                        setLogin({} as ILogin)
-                                        setLocalUser({} as IUser)
-                                        window.location.href = '/'
-                                    }
-                                }
+                                onClick={logOut}
                                 className="btn btn-sm">Log out
                             </button>
                         </li>

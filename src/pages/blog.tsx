@@ -9,7 +9,7 @@ const Blog = () => {
         description: "",
         blog: ""
     })
-    const {user} = useGlobalContext();
+    const {localUser} = useGlobalContext();
     const [isName, setisName] = useState(true)
     const [isTitle, setisTitle] = useState(true)
     const [isDesc, setisDesc] = useState(true)
@@ -92,7 +92,7 @@ const Blog = () => {
                             name="name" 
                             type="text"
                             required
-                            value={user.username}
+                            value={localUser.username}
                             placeholder="Name and Surname"
                             className="input input-bordered w-full max-w-xs mt-4"
                             onChange={HandleChange}

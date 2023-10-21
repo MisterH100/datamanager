@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 
 interface IEmail{
+    _id: number,
     name: string,
     email: string,
     message: string
@@ -11,18 +12,7 @@ interface IEmail{
 
 const Email = () => {
     const [loading, setLoading] = useState<boolean>();
-    const [feedback, setFeedback] = useState<boolean>();
-
-    const [arlet, setArlet] = useState({
-        image: "",
-        alertMessage: ""
-    })
-    const [email, setEmail] = useState<IEmail>({
-        name: "",
-        email: "",
-        message: ""
-    });
-
+    const [email, setEmail] = useState<IEmail>({} as IEmail);
     const { emailId } = useParams();
 
     const fetchData = async () => {
@@ -33,28 +23,13 @@ const Email = () => {
             console.log(error);
         }
     }
-    const deleteData = () => {
+    const deleteData = (id: number) => {
         setLoading(true);
         try {
-            axios.delete(`https://misterh-api-server.onrender.com/api/emails/email/${emailId}`);
-            setTimeout(() => {
-                setLoading(false)
-                setFeedback(true);
-                setArlet({
-                    ...arlet,
-                    image: ":)",
-                    alertMessage: "email deleted"
-                });
-
-            }, 2000)
+            axios.delete(`https://misterh-api-server.onrender.com/api/emails/email/${id}`);
+            setLoading(false)
         } catch (error) {
             console.log(error);
-            setFeedback(true)
-            setArlet({
-                ...arlet,
-                image: "!",
-                alertMessage: "unable to delete email"
-            });
         }
     }   
     useEffect(() => {
@@ -62,32 +37,38 @@ const Email = () => {
     }, [email]);
 
     return (
-        <section className="w-full px-10 md:px-60 min-w-[300px]">
-            <div>
-                <div className="flex flex-col md:flex-row border-b gap-[10px]">
-                    <h1 className="text-5xl font-bold">{email.name}</h1>
-                    <p className="py-6">{email.email}</p>
+        <section className="w-full px-10 md:px-60 pt-20 min-w-[300px]">
+            <div className="text-black dark:text-white">
+
+                <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                    <h3 
+                        className="text-xl font-semibold text-gray-900 dark:text-white">
+                        <Link to={`mailto:${email.email}`}>
+                            {email.email}
+                        </Link>
+                        <span className="text-gray-500 text-sm pl-2">{email.name}</span>
+                    </h3>
+                    
                 </div>
-                <p className="py-6">{email.message}</p>
 
+                <div className="p-6 space-y-6">
+                    <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                        {email.message}
+                    </p>
+                </div>
+                <div className="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <Link 
+                        to={'/emails'}
+                        className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700">Back
+                    </Link>
+                    <button 
+                        type="button" 
+                        className="text-white bg-red-500 hover:bg-red-900  rounded-lg text-sm font-medium px-5 py-2.5"
+                        onClick={()=>deleteData(email._id)}
+                        >{loading?"loading...": "Delete"}
+                    </button>
+                </div>
             </div>
-            <div className="w-full flex items-center justify-between gap-[10px]">
-                <Link to={'/'}>
-                    <button className="btn btn-md w-28">back</button>
-                </Link>
-                <button onClick={deleteData} className="btn-error btn btn-md">
-                    {loading? "deleting...": "delete"}
-                </button>
-                {feedback ? 
-                        <div className="alert alert-success">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        <span>{arlet.alertMessage}</span>
-                        <div>{ arlet.image}</div>
-                        </div>
-                : ""}
-
-            </div>
-           
         </section>
     )
 }

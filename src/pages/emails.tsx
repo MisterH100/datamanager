@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import { useGlobalContext } from "../utils/globalContext";
 
 
 interface IEmails{
@@ -12,13 +11,7 @@ interface IEmails{
 }
 
 const ContactEmails = () => {
-    const [emails, setEmails] = useState<IEmails[]>([{
-        _id: 1,
-        name: "",
-        email: "",
-        message: ""
-    }])
-    const {user} = useGlobalContext();
+    const [emails, setEmails] = useState<IEmails[]>([{}as IEmails])
 
     const fetchData = async () => {
         try {
@@ -33,52 +26,32 @@ const ContactEmails = () => {
     }, [emails]);
 
     return (
-        <section className="relative">
-            {user.admin == true?
-                <table className="w-full md:w-3/4 mx-auto table rounded-none">
+        <section className="relative pt-20">
+           <div className="w-full overflow-x-auto md:px-20 text-black dark:text-white">
+                <table className="table table-zebra min-w-[300px]">
                     <thead>
-                        <tr className="bg-base-300">
-                            <th>Name</th>
-                            <th className="hidden md:inline-block">email</th>
-                            <th>Open email</th>
-                        </tr>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Message</th>
+                        <th></th>
+                    </tr>
                     </thead>
-                    {emails?
-                        <tbody>
-                            {emails.map((email) => {
-                            return (
-
-                                    <tr key={email._id} className="odd:bg-base-200 even:bg-base-300">
-                                        <td>                              
-                                            <div className="font-bold">{email.name}</div>
-                                            <div className="text-xs sm:text-sm opacity-50">{ email.email}</div>                        
-                                        </td>
-                                            
-                                        <td className="hidden md:inline">
-                                            {email.message}
-                                        </td>
-                                            
-                                        <th>
-                                            <Link to={`/emails/${email._id}`}>
-                                                <button className="btn btn-ghost btn-xs">details</button>
-                                            </Link>
-                                        </th>
-                                    
-                                    </tr>    
-                                )
-                            })}
-                            <tr>
-                                <th></th>
-                                    <td>
-                                        {emails.length == 0? "No emails": ''}
-                                    </td>
-                                <th></th>
-                            </tr>
-                        </tbody>: null
-                    }
-                </table>:
-                null
-            }
+                    <tbody>
+                    {emails.map((email,index) =>
+                      
+                        <tr key={email._id}>
+                            <th>{index + 1}</th>
+                            <td>{email.name}</td>
+                            <td>{email.message}</td>
+                            <td>
+                                <Link to={`/emails/${email._id}`}>details</Link>
+                            </td>
+                        </tr>
+                    )}
+                    </tbody>
+                </table>
+            </div>
         </section>
     )
 }

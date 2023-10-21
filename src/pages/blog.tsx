@@ -1,5 +1,6 @@
 import {useState } from "react";
 import axios from 'axios';
+import { useGlobalContext } from "../utils/globalContext";
 
 const Blog = () => {
     const [blogData, setBlogData] = useState({
@@ -8,6 +9,7 @@ const Blog = () => {
         description: "",
         blog: ""
     })
+    const {user} = useGlobalContext();
     const [isName, setisName] = useState(true)
     const [isTitle, setisTitle] = useState(true)
     const [isDesc, setisDesc] = useState(true)
@@ -74,7 +76,7 @@ const Blog = () => {
     }
 
     return (
-        <section className="w-full px-1 md:px-60 min-w-[300px]">
+        <section className="w-full px-1 md:px-60 pt-20 min-w-[300px] text-black dark:text-white">
             
             {published?
             <div className="alert alert-success my-10">
@@ -90,10 +92,11 @@ const Blog = () => {
                             name="name" 
                             type="text"
                             required
-                            value={blogData.name}
+                            value={user.username}
                             placeholder="Name and Surname"
                             className="input input-bordered w-full max-w-xs mt-4"
                             onChange={HandleChange}
+                            disabled
                         />
                     </label>
                     <div className="w-full flex justify-center md:justify-end items-center pt-8">

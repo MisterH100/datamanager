@@ -4,10 +4,11 @@ import { useGlobalContext } from "../utils/globalContext"
 
 
 export const HomeLinks =()=>{
-    const {user} = useGlobalContext();
-    const isAdmin = user.admin;
+    const {localUser} = useGlobalContext();
+    const isAdmin = localUser.admin;
+
     return(
-        <div className="w-fit mx-auto h-fit grid grid-cols-1 md:grid-cols-2 gap-10 pt-10">
+        <div className="w-fit mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 pt-10">
             {isAdmin?
                 <Link to={"/emails" } className="w-full md:w-96 h-fit bg-base-100 shadow-xl border border-gray-200 hover:bg-base-200">
                     <div className="card-body">

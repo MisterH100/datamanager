@@ -5,7 +5,7 @@ import { useState } from "react";
 
 
 export const Login = ()=>{
-    const {login,setLogin,setUser,setLocalUser} = useGlobalContext();
+    const {login,setLogin,setLocalUser,setToken,setIsAuthenticated} = useGlobalContext();
     const [status, setStatus] = useState("");
     const [loading,setLoading] = useState(false);
     
@@ -19,7 +19,7 @@ export const Login = ()=>{
             setLoading(true)
             try {
                 
-                await axios.post("https://misterh-api-server.onrender.com/api/login", {
+                await axios.post("http://localhost:8000/api/login", {
                     username: login.username,
                     password: login.password
                 },
@@ -27,9 +27,11 @@ export const Login = ()=>{
                     'Content-Type': 'application/json'
                 }})
                 .then((response: any) =>{
-                    setUser(response.data)
-                    setLocalUser(response.data)
+                    setLocalUser(response.data.user)
+                    setToken(response.data.token)
+                    setIsAuthenticated(true)
                     setLoading(false)
+
                 })
             } catch (error: any) {
                 console.log(error.response.data);
@@ -39,6 +41,7 @@ export const Login = ()=>{
         }
         setLoading(false)
     }
+
     
     return(
         <div className="w-full hero min-h-screen bg-base-200">

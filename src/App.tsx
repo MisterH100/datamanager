@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
 import Header from "./components/header";
 import ContactEmails from "./pages/emails";
 import Email from './pages/email';
@@ -9,12 +9,14 @@ import Home from './pages/home';
 
 
 function App() {
-  const {localUser} = useGlobalContext();
+  const {localUser,isAuthenticated} = useGlobalContext();
   const isAdmin = localUser.admin;
+  
+
   return (
     <main className="w-full bg-base-100 min-h-screen relative min-w-[300px]">
       <Header/>
-      {localUser.username != null?
+      {isAuthenticated?
         <>
           <Routes>
             <Route path='/' element={<Home/>}/>
@@ -36,3 +38,5 @@ function App() {
 }
 
 export default App
+
+

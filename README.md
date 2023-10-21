@@ -1,3 +1,14 @@
+# Data manager
+
+This application is designed to manage data from all my web applications
+
+# Technologies used
+
+React + TypeScript + Vite
+Tailwind + DaisyUi
+NodeJs + Express + MongoDb 
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

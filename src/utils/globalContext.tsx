@@ -41,18 +41,18 @@ export const GlobalContextProvider = ({children}:{children: React.ReactNode})=>{
         setIsAuthenticated(false);
         setToken("");
     }
+    const checkAuth = async() =>{
+        axios.post("https://misterh-api-server.onrender.com/api/auth", {
+          user: localUser,
+        },
+        {headers: {
+          'auth-token': token,
+        }}).then(response =>{
+          setIsAuthenticated(response.data.authenticated)
+        })
+    }
 
     useEffect(() =>{
-        const checkAuth =async()=>{
-          axios.post("https://misterh-api-server.onrender.com/api/auth", {
-            user: localUser,
-          },
-          {headers: {
-            'auth-token': token,
-          }}).then(response =>{
-            setIsAuthenticated(response.data.authenticated)
-          })
-        }
         checkAuth()
     },[])
 

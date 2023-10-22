@@ -4,7 +4,7 @@ import { useRef } from "react";
 
 
 const Header = () => {
-    const {localUser,logOut} = useGlobalContext();
+    const {localUser,logOut,isAuthenticated} = useGlobalContext();
     const modalRef = useRef<HTMLDialogElement>(null);
     const showModal =()=>{
         modalRef.current?.showModal();
@@ -15,7 +15,7 @@ const Header = () => {
             <div className="flex-1 text-black dark:text-white">
                 <Link to={"/"} className="btn btn-ghost normal-case text-xl">data manager</Link>
             </div>
-            {localUser.username != null?
+            {isAuthenticated?
                 <div className="dropdown dropdown-end cursor-pointer">
                     <label tabIndex={0}>
                         <div className="avatar placeholder cursor-pointer">

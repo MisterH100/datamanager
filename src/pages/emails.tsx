@@ -23,7 +23,7 @@ const ContactEmails = () => {
     } 
     useEffect(() => {
         fetchData();
-    }, [emails]);
+    }, []);
 
     return (
         <section className="relative pt-20">

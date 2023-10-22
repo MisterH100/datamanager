@@ -21,7 +21,7 @@ const Header = () => {
                         <div className="avatar placeholder cursor-pointer">
                             <div className="bg-neutral-focus text-neutral-content rounded-full w-16">
                                 <span className="text-xl">
-                                    {localUser.username.charAt(0).toUpperCase()}
+                                    {localUser.username.charAt(0)}
                                 </span>
                             </div>
                         </div>

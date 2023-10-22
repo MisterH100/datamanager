@@ -10,7 +10,7 @@ import Home from './pages/home';
 
 function App() {
   const {localUser,isAuthenticated} = useGlobalContext();
-  const isAdmin = localUser.admin;
+  const isAdmin = localUser.admin || false;
   
 
   return (

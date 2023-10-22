@@ -92,7 +92,7 @@ const Blog = () => {
                             name="name" 
                             type="text"
                             required
-                            value={localUser.username}
+                            value={`${localUser.name} ${localUser.surname}`}
                             placeholder="Name and Surname"
                             className="input input-bordered w-full max-w-xs mt-4"
                             onChange={HandleChange}

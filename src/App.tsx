@@ -16,22 +16,24 @@ function App() {
   return (
     <main className="w-full bg-base-100 min-h-screen relative min-w-[300px]">
       <Header/>
-      {isAuthenticated?
-        <>
-          <Routes>
-            <Route path='/' element={<Home/>}/>
-            <Route path='emails' element={isAdmin? <ContactEmails />: <Blog/>} />
-            <Route path='emails/:emailId' element={isAdmin? <Email />: null} />
-            <Route path='publish' element={<Blog/>} />
-          </Routes>
-
-        </>:
-        <>
-          <Routes>
-            <Route path='/' element={ <Login/>}/>
-          </Routes>
-        </>
-      }
+        <Routes>
+          <Route 
+            path='/' 
+            element={isAuthenticated? <Home/>: <Login/>} 
+          />
+          <Route 
+            path='emails' 
+            element={isAuthenticated? isAdmin? <ContactEmails />: <Blog/>: <Login/>} 
+          />
+          <Route 
+            path='emails/:emailId' 
+            element={isAuthenticated? isAdmin? <Email />: null: <Login/>} 
+          />
+          <Route 
+            path='publish' 
+            element={isAuthenticated? isAdmin?<Blog/>: null: <Login/>} 
+          />
+        </Routes>
     </main>
 
   )

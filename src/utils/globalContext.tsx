@@ -7,11 +7,13 @@ export interface ILogin{
     password: string;
 }
 export interface IUser{
+    _id: number, 
+    name: string,
+    surname: string,
     username: string;
     email: string;
     admin: boolean;
-    createdAt: Date;
-    
+    createdAt: Date;   
 }
 
 interface IGlobalContext{

@@ -12,7 +12,7 @@ const Email = () => {
  
 
     return (
-        <section className="realtive w-full px-10 md:px-60 pt-20 min-w-[300px]">
+        <section className="realtive w-full min-h-screen px-10 md:px-60 pt-20 min-w-[300px]">
             {loading?<Loading/>:
                 <div className="text-black dark:text-white">
 

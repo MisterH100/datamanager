@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useGlobalContext } from "../utils/globalContext";
 
 const Blog = () => {
+    const {loading,setLoading} = useGlobalContext()
     const [blogData, setBlogData] = useState({
         name: "Handsome Nyathi",
         title: "",
@@ -14,7 +15,6 @@ const Blog = () => {
     const [isTitle, setisTitle] = useState(true)
     const [isDesc, setisDesc] = useState(true)
     const [isShort, setisShort] = useState(true)
-    const [loading, setLoading] = useState(false)
     const [published, setPublished] = useState(false)
 
     const HandleChange = (e:any) => {

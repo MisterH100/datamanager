@@ -6,6 +6,8 @@ import Blog from './pages/blog';
 import { useGlobalContext } from './utils/globalContext';
 import { Login } from './components/login';
 import Home from './pages/home';
+import { Footer } from './components/footer';
+import { UserPage } from './pages/user';
 
 
 function App() {
@@ -21,7 +23,7 @@ function App() {
           />
           <Route 
             path='emails' 
-            element={isAuthenticated? user.admin? <ContactEmails />: <Blog/>: <Login/>} 
+            element={isAuthenticated? user.admin? <ContactEmails />: null: <Login/>} 
           />
           <Route 
             path='emails/:emailId' 
@@ -31,7 +33,12 @@ function App() {
             path='publish' 
             element={isAuthenticated? user.admin?<Blog/>: null: <Login/>} 
           />
+          <Route
+            path='user/:userId'
+            element={isAuthenticated? <UserPage/>: <Login/>}
+          />
         </Routes>
+      <Footer/>
     </main>
 
   )

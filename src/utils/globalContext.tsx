@@ -50,22 +50,28 @@ export const GlobalContextProvider = ({children}:{children: React.ReactNode})=>{
 
     const logOut = () =>{
         setIsAuthenticated(false);
-        setToken(" ")
+        setToken(" ");
+        window.location.href = "/"
     }
     
     const checkAuth = async() =>{
         setLoading(true)
-        await axios.post("https://misterh-api-server.onrender.com/api/auth",{
-            username: user.username
-        },
-        {headers: {
-          'auth-token': token,
-        }}).then(response =>{
-          setIsAuthenticated(response.data.authenticated)
-          setUser(response.data.user)
-          setLoading(false)
-          setRecent({...recent, token: token})
-        })
+        try {
+            
+            await axios.post("https://misterh-api-server.onrender.com/api/auth",{
+                username: user.username
+            },
+            {headers: {
+              'auth-token': token,
+            }}).then(response =>{
+              setIsAuthenticated(response.data.authenticated)
+              setUser(response.data.user)
+              setLoading(false)
+            })
+        } catch (error) {
+            console.log(error)
+            setIsAuthenticated(false)
+        }
     }
 
     useEffect(() =>{

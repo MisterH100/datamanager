@@ -15,7 +15,7 @@ const Header = () => {
         <header className="sticky top-0 z-40 navbar bg-base-100 border-b border-slate-500 ">
             <ProgressBar/>
             <div className="flex-1 text-black dark:text-white">
-                <Link to={"/"} className="btn btn-ghost normal-case text-xl">data manager</Link>
+                <Link to={"/"} className="normal-case text-xl">data manager</Link>
             </div>
             {isAuthenticated?
                 <div className="dropdown dropdown-end cursor-pointer">
@@ -32,10 +32,7 @@ const Header = () => {
 
                     <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 text-black dark:text-white">
                         <li className="mb-2">
-                            <Link to={"/"}>{user.username}</Link>
-                        </li>
-                        <li className="mb-2">
-                            <Link to={"/"}>settings</Link>
+                            <Link to={`/user/${user._id}`}>{user.username}</Link>
                         </li>
                         <li>
                             <button

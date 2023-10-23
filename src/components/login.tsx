@@ -16,17 +16,23 @@ export const Login = ()=>{
 
     const authUser = async() =>{
         setLoading(true)
-        await axios.post("https://misterh-api-server.onrender.com/api/auth",{
-            username: recent.username,
-        },
-        {headers: {
-          'auth-token': recent.token,
-        }}).then(response =>{
-          setIsAuthenticated(response.data.authenticated);
-          setUser(response.data.user);
-          setLoading(false);
-          setToken(recent.token)
-        })
+        try { 
+            await axios.post("https://misterh-api-server.onrender.com/api/auth",{
+                username: recent.username,
+            },
+            {headers: {
+              'auth-token': recent.token,
+            }}).then(response =>{
+              setIsAuthenticated(response.data.authenticated);
+              setUser(response.data.user);
+              setLoading(false);
+              setToken(recent.token)
+            })
+        } catch (error) {
+           console.log(error)
+           setIsAuthenticated(false)
+           setRecent({...recent, token: "", username: ""})
+        }
     }
 
     const HandleSubmit = async (e: any) =>{
@@ -47,11 +53,9 @@ export const Login = ()=>{
                     setToken(response.data.token);
                     setIsAuthenticated(true);
                     setLoading(false);
-                    setRecent({...recent,username: response.data.user.username, })
-
+                    setRecent({...recent,username: response.data.user.username,token:response.data.token })
                 })
             } catch (error: any) {
-                console.log(error.response.data);
                 setStatus(error.response.data);
                 setLoading(false);
             }

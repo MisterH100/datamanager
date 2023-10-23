@@ -9,9 +9,7 @@ import Home from './pages/home';
 
 
 function App() {
-  const {localUser,isAuthenticated} = useGlobalContext();
-  const isAdmin = localUser.admin || false;
-  
+  const {user,isAuthenticated} = useGlobalContext();
 
   return (
     <main className="w-full bg-base-100 min-h-screen relative min-w-[300px]">
@@ -23,15 +21,15 @@ function App() {
           />
           <Route 
             path='emails' 
-            element={isAuthenticated? isAdmin? <ContactEmails />: <Blog/>: <Login/>} 
+            element={isAuthenticated? user.admin? <ContactEmails />: <Blog/>: <Login/>} 
           />
           <Route 
             path='emails/:emailId' 
-            element={isAuthenticated? isAdmin? <Email />: null: <Login/>} 
+            element={isAuthenticated? user.admin? <Email />: null: <Login/>} 
           />
           <Route 
             path='publish' 
-            element={isAuthenticated? isAdmin?<Blog/>: null: <Login/>} 
+            element={isAuthenticated? user.admin?<Blog/>: null: <Login/>} 
           />
         </Routes>
     </main>

@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import {useGlobalContext } from "../utils/globalContext";
 import { useRef } from "react";
+import { ProgressBar } from "./loadingBar";
 
 
 const Header = () => {
-    const {localUser,logOut,isAuthenticated} = useGlobalContext();
+    const {user,logOut,isAuthenticated} = useGlobalContext();
     const modalRef = useRef<HTMLDialogElement>(null);
     const showModal =()=>{
         modalRef.current?.showModal();
@@ -12,23 +13,29 @@ const Header = () => {
 
     return (
         <header className="sticky top-0 z-40 navbar bg-base-100 border-b border-slate-500 ">
+            <ProgressBar/>
             <div className="flex-1 text-black dark:text-white">
                 <Link to={"/"} className="btn btn-ghost normal-case text-xl">data manager</Link>
             </div>
             {isAuthenticated?
                 <div className="dropdown dropdown-end cursor-pointer">
-                    <label tabIndex={0}>
+
+                    <div tabIndex={0} title={user.username}>
                         <div className="avatar placeholder cursor-pointer">
                             <div className="bg-neutral-focus text-neutral-content rounded-full w-16">
                                 <span className="text-xl">
-                                    {localUser.username.charAt(0)}
+                                    {user.username.charAt(0)}
                                 </span>
                             </div>
                         </div>
-                    </label> 
+                    </div>
+
                     <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 text-black dark:text-white">
                         <li className="mb-2">
-                            <Link to={"/"}>{localUser.username}</Link>
+                            <Link to={"/"}>{user.username}</Link>
+                        </li>
+                        <li className="mb-2">
+                            <Link to={"/"}>settings</Link>
                         </li>
                         <li>
                             <button

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { useGlobalContext } from "../utils/globalContext";
 
 
 interface IEmails{
@@ -12,13 +13,18 @@ interface IEmails{
 
 const ContactEmails = () => {
     const [emails, setEmails] = useState<IEmails[]>([{}as IEmails])
+    const {setLoading} = useGlobalContext()
 
     const fetchData = async () => {
+        setLoading(true);
         try {
-            const response = await axios.get('https://misterh-api-server.onrender.com/api/emails');
-            setEmails(response.data)
+            await axios.get('https://misterh-api-server.onrender.com/api/emails').then(response =>{
+                setEmails(response.data);
+                setLoading(false)
+            });
         } catch (error) {
             console.log(error)
+            setLoading(false)
         }
     } 
     useEffect(() => {
@@ -40,7 +46,7 @@ const ContactEmails = () => {
                     <tbody>
                     {emails.map((email,index) =>
                       
-                        <tr key={email._id}>
+                        <tr key={index}>
                             <th>{index + 1}</th>
                             <td>{email.name}</td>
                             <td>{email.message}</td>

@@ -1,16 +1,32 @@
 import axios from "axios"
 import {useGlobalContext } from "../utils/globalContext"
-import { useState } from "react";
+import {useState } from "react";
+import { Link } from "react-router-dom";
 
 
 
 export const Login = ()=>{
-    const {login,setLogin,setLocalUser,setToken,setIsAuthenticated} = useGlobalContext();
+    const {recent,login,setLogin,setUser,setToken,setIsAuthenticated,setRecent} = useGlobalContext();
     const [status, setStatus] = useState("");
-    const [loading,setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     
     const handleChange =(e:any)=>{
         setLogin({...login, [e.target.name]: e.target.value})
+    }
+
+    const authUser = async() =>{
+        setLoading(true)
+        await axios.post("https://misterh-api-server.onrender.com/api/auth",{
+            username: recent.username,
+        },
+        {headers: {
+          'auth-token': recent.token,
+        }}).then(response =>{
+          setIsAuthenticated(response.data.authenticated);
+          setUser(response.data.user);
+          setLoading(false);
+          setToken(recent.token)
+        })
     }
 
     const HandleSubmit = async (e: any) =>{
@@ -27,29 +43,38 @@ export const Login = ()=>{
                     'Content-Type': 'application/json'
                 }})
                 .then((response: any) =>{
-                    setLocalUser(response.data.user)
-                    setToken(response.data.token)
-                    setIsAuthenticated(true)
-                    setLoading(false)
+                    setUser(response.data.user);
+                    setToken(response.data.token);
+                    setIsAuthenticated(true);
+                    setLoading(false);
+                    setRecent({...recent,username: response.data.user.username, })
 
                 })
             } catch (error: any) {
                 console.log(error.response.data);
                 setStatus(error.response.data);
-                setLoading(false)
+                setLoading(false);
             }
         }
         setLoading(false)
     }
 
-    
+
+ 
     return(
         <div className="w-full hero min-h-screen bg-base-200">
-            <div className="w-full hero-content p-1 md:p-4 flex-col lg:flex-row-reverse">
-                <div className="text-center lg:text-left w-full md:max-w-lg text-black dark:text-white">
-                    <h1 className="text-5xl font-bold">data manager</h1>
-                    <p className="py-6">By logging in to data manager you have a control center form all your web applications you can add items, remove and modify your data in your databse, data manager gives a more easy way to manage your data</p>
-                </div>
+            <div className="w-full hero-content p-1 md:p-4 flex-col">
+                    {recent.username != null?
+                        <button
+                            onClick={authUser}
+                            className="avatar placeholder">
+                            <div className="bg-neutral-focus text-neutral-content rounded-full w-24">
+                                <span className="text-3xl">{recent.username.charAt(0)}</span>
+                            </div>
+                        </button>:
+                        null
+                    }
+
                 <div className="hero-content flex-shrink-0 flex-col w-full md:w-1/2">
                     <div className="w-full text-center text-black dark:text-white">
                         <h1 className="text-5xl font-bold">Login</h1>
@@ -57,41 +82,51 @@ export const Login = ()=>{
                     <div className="card w-full shadow-2xl bg-base-100">
                         <form className="card-body">
                             <div className="form-control text-black dark:text-white">
-                                <label className="label">
+                                <label 
+                                    htmlFor="username" 
+                                    className="label">
                                     <span className="label-text">Username</span>
                                 </label>
                                 <input 
                                     type="text"
+                                    id="username"
                                     name="username"
                                     onChange={handleChange}
-                                    placeholder="username" 
+                                    placeholder="username"
+                                    autoComplete="true"
                                     className="input input-bordered" 
                                     required 
                                 />
                             </div>
                             <div className="form-control text-black dark:text-white">
-                                <label className="label">
+                                <label 
+                                    htmlFor="password"
+                                    className="label">
                                     <span className="label-text">Password</span>
                                 </label>
                                 <input 
                                     type="password"
+                                    id="password"
                                     name="password"
                                     onChange={handleChange}
                                     placeholder="password" 
                                     className="input input-bordered" 
                                     required 
                                 />
-                                {
-                                    /*
-                                    <label className="label">
-                                        <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                                    </label>
-                                    */
-                                }
+                                    
+                                <span
+                                    className="label">
+                                    <Link
+                                        to="#" 
+                                        className="label-text-alt link link-hover"
+                                        >Forgot password?
+                                    </Link>
+                                </span>
                             </div>
                             <div className="form-control mt-6">
                                 <button 
                                     className="btn btn-primary"
+                                    disabled={loading?true:false}
                                     onClick={HandleSubmit}
                                     >
                                         {

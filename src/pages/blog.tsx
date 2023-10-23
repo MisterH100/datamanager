@@ -9,7 +9,7 @@ const Blog = () => {
         description: "",
         blog: ""
     })
-    const {localUser} = useGlobalContext();
+    const {user} = useGlobalContext();
     const [isName, setisName] = useState(true)
     const [isTitle, setisTitle] = useState(true)
     const [isDesc, setisDesc] = useState(true)
@@ -85,14 +85,17 @@ const Blog = () => {
             </div>: null}
             <form className="flex flex-col w-full">
                 <div className="w-full flex flex-col md:flex-row bg-base-300 rounded-box min-w-full py-20 px-2 md:px-10">
-                    <label htmlFor="name" className="flex flex-col">
+                    <label 
+                        htmlFor="name" 
+                        className="flex flex-col">
                         {isName ?<span className="label-text">Name</span>:<span className="label-text text-red-600">can not publish without Name!!</span> }
                         <input
                             id="name"
                             name="name" 
                             type="text"
+                            autoComplete="true"
                             required
-                            value={`${localUser.name} ${localUser.surname}`}
+                            value={`${user.name} ${user.surname}`}
                             placeholder="Name and Surname"
                             className="input input-bordered w-full max-w-xs mt-4"
                             onChange={HandleChange}

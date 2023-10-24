@@ -24,6 +24,13 @@ export const HomeLinks =()=>{
                         <p className="font-normal text-gray-700 dark:text-gray-400">Publish your creative blogs for Insghts blogging app</p>
                     </div>
                     </Link>
+
+                    <Link to={`/user/${user._id}`} className="w-full md:w-96 h-fit bg-base-100 shadow-xl border border-gray-500 hover:bg-base-200">
+                    <div className="card-body">
+                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">User profile</h5>
+                        <p className="font-normal text-gray-700 dark:text-gray-400">view user profile, edit and change username</p>
+                    </div>
+                    </Link>
                 </>:
                 <>
                     <Link to={"https://insights-blogs.vercel.app" } className="w-full md:w-96 h-fit bg-base-100 shadow-xl border border-gray-500 hover:bg-base-200">

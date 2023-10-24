@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useGetEmail } from "../utils/useGetEmails";
 import { useGlobalContext } from "../utils/globalContext";
 import { Loading } from "../components/loading";
+import { SideBar } from "../components/sidebar";
 
 
 const Email = () => {
@@ -12,9 +13,10 @@ const Email = () => {
  
 
     return (
-        <section className="realtive w-full min-h-screen px-10 md:px-60 pt-20 min-w-[300px]">
+        <section className="relative w-full min-h-screen min-w-[300px] flex">
+            <SideBar/>
             {loading?<Loading/>:
-                <div className="text-black dark:text-white">
+                <div className="w-full text-black dark:text-white px-2 md:px-10 pt-10">
 
                     <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
                         <h3 

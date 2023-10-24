@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useGetEmails } from "../utils/useGetEmails";
 import { useGlobalContext } from "../utils/globalContext";
 import { Loading } from "../components/loading";
+import { SideBar } from "../components/sidebar";
 
 
 
@@ -10,9 +11,10 @@ const ContactEmails = () => {
     const emails = useGetEmails();
 
     return (
-        <section className="relative pt-20 min-h-screen">
-            {loading?<Loading/>:
-                <div className="w-full overflow-x-auto md:px-20 text-black dark:text-white">
+        <section className="relative flex min-h-screen">
+            <SideBar/>
+            <div className="relative w-full overflow-x-auto md:px-20 pt-10 text-black dark:text-white">
+                {loading?<Loading/>:
                     <table className="table table-zebra min-w-[300px]">
                         <thead>
                         <tr>
@@ -36,8 +38,9 @@ const ContactEmails = () => {
                         )}
                         </tbody>
                     </table>
-                </div>
-            }
+                }
+            </div>
+            
         </section>
     )
 }

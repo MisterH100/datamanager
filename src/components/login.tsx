@@ -68,16 +68,16 @@ export const Login = ()=>{
     return(
         <div className="w-full hero min-h-screen bg-base-200">
             <div className="w-full hero-content p-1 md:p-4 flex-col">
-                    {recent.username != null?
-                        <button
-                            onClick={authUser}
-                            className="avatar placeholder">
-                            <div className="bg-neutral-focus text-neutral-content rounded-full w-24">
-                                <span className="text-3xl">{recent.username.charAt(0)}</span>
-                            </div>
-                        </button>:
-                        null
-                    }
+                {recent.username != null?
+                    <button
+                        onClick={authUser}
+                        className="avatar placeholder">
+                        <div className="bg-neutral-focus text-neutral-content rounded-full w-24">
+                            <span className="text-3xl">{recent.username?.charAt(0)}</span>
+                        </div>
+                    </button>:
+                    null
+                }
 
                 <div className="hero-content flex-shrink-0 flex-col w-full md:w-1/2">
                     <div className="w-full text-center text-black dark:text-white">

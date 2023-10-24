@@ -49,9 +49,9 @@ export const GlobalContextProvider = ({children}:{children: React.ReactNode})=>{
     const [loading, setLoading] = useState(false)
 
     const logOut = () =>{
+        window.location.href = "/"
         setIsAuthenticated(false);
         setToken(" ");
-        window.location.href = "/"
     }
     
     const checkAuth = async() =>{

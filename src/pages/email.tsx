@@ -26,7 +26,13 @@ const Email = () => {
                             </Link>
                             <span className="text-gray-500 text-sm pl-2">{email.name}</span>
                         </h3>
-                        
+                        <p>
+                            {
+                                new Date(email.sentAt).toLocaleString("en-ZA", {
+                                    dateStyle: "short",
+                                })
+                            }
+                        </p>
                     </div>
 
                     <div className="p-6 space-y-6">

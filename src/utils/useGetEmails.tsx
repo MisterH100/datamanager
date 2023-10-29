@@ -3,15 +3,16 @@ import { useGlobalContext } from "./globalContext"
 import axios from "axios"
 
 
-interface IEmails{
-    _id?: number,
+interface IEmail{
+    _id: number,
     name: string,
     email: string,
-    message: string
+    message: string,
+    sentAt:Date,
 }
 
 export const useGetEmails = () =>{
-    const [emails, setEmails] = useState<IEmails[]>([{}as IEmails])
+    const [emails, setEmails] = useState<IEmail[]>([{}as IEmail])
     const {setLoading} = useGlobalContext()
 
     const fetchData = async () => {
@@ -33,12 +34,6 @@ export const useGetEmails = () =>{
     return emails
 }
 
-interface IEmail{
-    _id: number,
-    name: string,
-    email: string,
-    message: string
-}
 
 export const useGetEmail = (emailId:any) =>{
     const [email, setEmail] = useState<IEmail>({} as IEmail);

@@ -3,7 +3,7 @@ import { useLocalStroge } from './useLocalStorage';
 import axios from 'axios';
 
 export interface ILogin{
-    username: string;
+    email: string;
     password: string;
 }
 

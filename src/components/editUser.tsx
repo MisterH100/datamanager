@@ -58,7 +58,6 @@ export const EditUser = ({editRef}:{editRef: any}) =>{
         e.preventDefault();
         const formData = new FormData();
         formData.append("profileImage", file.file);
-        console.log(formData.get("profileImage"))
         try {
             setLoading(true)
             await axios.put(`https://misterh-api-server.onrender.com/api/profile/${user._id}`,

@@ -26,7 +26,7 @@ export const Login = ()=>{
               setIsAuthenticated(response.data.authenticated);
               setUser(response.data.user);
               setLoading(false);
-              setToken(recent.token)
+              setToken(recent.token);
             })
         } catch (error) {
            console.log(error)
@@ -37,12 +37,12 @@ export const Login = ()=>{
 
     const HandleSubmit = async (e: any) =>{
         e.preventDefault()
-        if(login.username != null){
+        if(login.email != null){
             setLoading(true)
             try {
                 
                 await axios.post("https://misterh-api-server.onrender.com/api/login", {
-                    username: login.username,
+                    email: login.email,
                     password: login.password
                 },
                 {headers: {
@@ -87,16 +87,16 @@ export const Login = ()=>{
                         <form className="card-body">
                             <div className="form-control text-black dark:text-white">
                                 <label 
-                                    htmlFor="username" 
+                                    htmlFor="email" 
                                     className="label">
-                                    <span className="label-text">Username</span>
+                                    <span className="label-text">Email or Username</span>
                                 </label>
                                 <input 
                                     type="text"
-                                    id="username"
-                                    name="username"
+                                    id="email"
+                                    name="email"
                                     onChange={handleChange}
-                                    placeholder="username"
+                                    placeholder="email or username"
                                     autoComplete="true"
                                     className="input input-bordered" 
                                     required 

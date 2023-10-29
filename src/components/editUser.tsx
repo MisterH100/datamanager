@@ -15,12 +15,12 @@ export const EditUser = ({editRef}:{editRef: any}) =>{
 
     const HandleSubmit = async (e: any) =>{
         e.preventDefault()
-        if(newUserName.username != null){
+        if(newUserName.email != null){
             setLoading(true)
             try {
                 
                 await axios.put(`https://misterh-api-server.onrender.com/api/user/update-user/${user._id}`, {
-                    username: newUserName.username,
+                    username: newUserName.email,
                     password: newUserName.password
                 },
                 {headers: {

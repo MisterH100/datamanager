@@ -73,7 +73,7 @@ export const SideBar = () =>{
                 <span className="divider"></span>
                 <li>
                     <NavLink 
-                        to={`/user/${user._id}`}
+                        to={"/user"}
                         className={({isActive}) => isActive? "text-blue-500": "text-black dark:text-white"}
                         >User profile
                     </NavLink>

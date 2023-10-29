@@ -35,7 +35,7 @@ export const Login = ()=>{
         }
     }
 
-    const HandleSubmit = async (e: any) =>{
+    const HandleSubmit = async (e:React.MouseEvent<HTMLButtonElement>) =>{
         e.preventDefault()
         if(login.email != null){
             setLoading(true)

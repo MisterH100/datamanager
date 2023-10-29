@@ -34,7 +34,7 @@ function App() {
             element={isAuthenticated? user.admin?<Blog/>: null: <Login/>} 
           />
           <Route
-            path='user/:userId'
+            path='user'
             element={isAuthenticated? <UserPage/>: <Login/>}
           />
         </Routes>

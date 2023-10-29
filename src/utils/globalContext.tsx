@@ -18,6 +18,12 @@ export interface IUser{
     username: string;
     email: string;
     admin: boolean;
+    role: string;
+    profileImage: {
+        data: string;
+        image_url: string;
+        contentType: string;
+    }
     createdAt: Date;   
 }
 

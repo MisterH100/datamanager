@@ -33,20 +33,23 @@ const Header = () => {
             </div>
             {isAuthenticated?
                 <div className="dropdown dropdown-end cursor-pointer">
-
-                    <div tabIndex={0} title={user.username}>
-                        <div className="avatar placeholder cursor-pointer">
-                            <div className="bg-neutral-focus text-neutral-content rounded-full w-16">
-                                <span className="text-xl">
-                                    {user.username.charAt(0)}
-                                </span>
-                            </div>
+                    <div tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                        <div className="w-10 rounded-full">
+                            {user.profileImage?.image_url == null?
+                                <span className="text-xl w-full h-full text-center lowercase">
+                                    {user.username?.charAt(0)}
+                                </span>:
+                                <img 
+                                    src={user.profileImage.image_url}
+                                    alt={user.username} 
+                                />
+                            }
                         </div>
                     </div>
 
                     <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 text-black dark:text-white">
                         <li className="mb-2">
-                            <Link to={`/user/${user._id}`}>{user.username}</Link>
+                            <Link to={"/user"}>{user.username}</Link>
                         </li>
                         <li>
                             <button

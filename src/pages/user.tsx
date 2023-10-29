@@ -1,5 +1,3 @@
-import { useParams } from "react-router";
-import { useGetUser } from "../utils/useGetUser";
 import { useGlobalContext } from "../utils/globalContext";
 import { Loading } from "../components/loading";
 import { SideBar } from "../components/sidebar";
@@ -8,10 +6,8 @@ import { useRef } from "react";
 
 
 export const UserPage = () =>{
-    const {userId} = useParams();
-    const {loading,logOut} = useGlobalContext();
+    const {loading,logOut,user} = useGlobalContext();
     const editRef = useRef<HTMLDialogElement>(null)
-    const user = useGetUser(userId);
 
     const getDate = (date: Date) =>{
         return new Date(date).toLocaleString('en-Za', {dateStyle: "short"});
@@ -91,6 +87,14 @@ export const UserPage = () =>{
                                     </dt>
                                     <dd className="mt-1 text-sm text-black dark:text-white sm:mt-0 sm:col-span-2">
                                         {user.admin? "Admin": "Visitor" }
+                                    </dd>
+                                </div>
+                                <div className="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                    <dt className="text-sm font-medium text-gray-500">
+                                        Role
+                                    </dt>
+                                    <dd className="mt-1 text-sm text-black dark:text-white sm:mt-0 sm:col-span-2">
+                                        {user.role}
                                     </dd>
                                 </div>
                             </dl>

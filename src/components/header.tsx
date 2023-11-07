@@ -14,7 +14,7 @@ const Header = () => {
     }
 
     return (
-        <header className="sticky top-0 z-40 navbar bg-base-100 border-b border-slate-500 ">
+        <header className="sticky w-full h-16 top-0 z-40 navbar bg-base-100 border-b border-slate-500 ">
             <ProgressBar/>
             <div className="flex-1 text-black dark:text-white">
                 {isAuthenticated?
